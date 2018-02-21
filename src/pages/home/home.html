@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Monitor</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addHolding()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="!cryptoCompareProvider.holdings.length" padding>
+    <p>Anda belum memiliki holding dalam aplikasi ini. Silahkan menambahkan holding dengan menekan tombol berikut.</p>
+    <button ion-button full color="primary" (click)="addHolding()">Tambah</button>
+  </div>
+
+  <div *ngIf="cryptoCompareProvider.holdings.length">
+    <ion-card *ngFor="let holding of cryptoCompareProvider.holdings" style="border-top: 2px solid #488aff">
+      <ion-card-header color="primary">
+          <h1>
+            {{ holding.crypto }}
+            <ion-icon style="float: right;" (click)="showRemoveConfirm(holding)" name="close" color="danger"></ion-icon>
+          </h1>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Asset: ฿ {{ holding.amount }}</p>
+        <p>Value: Rp {{ holding.value }}</p>
+        <p>Total: Rp {{ holding.total }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
